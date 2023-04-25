@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculate a Number</title>
+    </head>
+    <body>
+        <h1>Calculate a Number</h1>
+        <form action="/result" method="post">
+            <label for="number">Enter a number:</label>
+            <input type="text" id="number" name="number">
+            <input type="submit" name="operation" value="Square">
+            <input type="submit" name="operation" value="Cube">
+            <input type="submit" name="operation" value="Fibonacci">
+        </form>
+        {% if result %}
+            <p>{{ result }}</p>
+        {% endif %}
+    </body>
+</html>

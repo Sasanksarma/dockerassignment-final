@@ -1,0 +1,32 @@
+version: '1'
+
+services:
+  main:
+    build: ./main
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  square:
+    build: ./square
+    ports:
+      - "5001:5001"
+  cube:
+    build: ./cube
+    ports:
+      - "5002:5002"
+  fibonacci:
+    build: ./fibonacii
+    ports:
+      - "5003:5003"
+  db:
+    image: mysql:5.7
+    restart: always
+    command: --init-file dbscript.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: '1234'
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
