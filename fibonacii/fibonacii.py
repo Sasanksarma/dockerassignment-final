@@ -21,4 +21,4 @@ def fibonacci():
     return f'The first {number} numbers of the Fibonacci sequence are: {sequence}.'
 
 if __name__ == '__main__':
-    app.run(port=5003)
+    app.run(port=5003,debug = True,host = '0.0.0.0')
