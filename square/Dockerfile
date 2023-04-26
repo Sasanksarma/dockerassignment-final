@@ -6,6 +6,6 @@ COPY . /app
 
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-EXPOSE 5001
+EXPOSE 5010
 
 CMD ["python", "square.py"]
