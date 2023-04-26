@@ -8,6 +8,6 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 RUN pip install mysql-connector
 
-EXPOSE 8000
+EXPOSE 8021
 
 CMD ["python", "app.py"]
