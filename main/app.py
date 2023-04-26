@@ -1,18 +1,17 @@
 from flask import Flask, request, render_template
-from flask_mysqldb import MySQL
 import requests
-import time,os
+import time
 import mysql.connector
 
 app = Flask(__name__)
 
 # Replace these values with your MySQL server credentials
-app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST', 'localhost')
-app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER', 'root')
-app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD', 'root')
-app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'flaskapp')
-
-mysql = MySQL(app)
+mysql_config = {
+    'user': 'root',
+    'password': '1234',
+    'host': 'mysql',
+    'database': 'flaskapp'
+}
 
 @app.route('/')
 def index():
@@ -36,14 +35,13 @@ def result():
     return render_template('index.html', result=result)
 
 def store_metric(table_name, metric):
-    conn = mysql.connect()
-    cursor = mysql.connection.cursor()
-    cursor.execute('Use database flaskapp')
-    cursor.execute(f'create table {table_name}(metric float)')
+    conn = mysql.connector.connect(**mysql_config)
+    cursor = conn.cursor()
     query = f'INSERT INTO {table_name} (metric) VALUES (%s)'
     cursor.execute(query, (metric,))
+    conn.commit()
     cursor.close()
     conn.close()
 
 if __name__ == '__main__':
-    app.run(port=8000,debug = True,host = '0.0.0.0')
+    app.run(port=8000,host='0.0.0.0',debug=true)
