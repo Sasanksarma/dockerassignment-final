@@ -6,6 +6,6 @@ COPY . /app
 
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-EXPOSE 5003
+EXPOSE 5030
 
 CMD ["python", "fibonacii.py"]
