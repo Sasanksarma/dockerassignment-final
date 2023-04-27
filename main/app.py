@@ -23,14 +23,14 @@ def result():
     operation = request.form['operation']
     if operation == 'Square':
         metric_start = time.time()
-        response = requests.post('http://0.0.0.0:5010/square', data={'number': number})
+        response = requests.post(url='http://localhost:5001/square', data={'number': number})
         metric_end = time.time()
         metric = metric_end-metric_start
         store_metric('sqaure', metric)
     elif operation == 'Cube':
-        response = requests.post('http://0.0.0.0:5020/cube', data={'number': number})
+        response = requests.post(url='http://localhost:5002/cube', data={'number': number})
     elif operation == 'Fibonacci':
-        response = requests.post('http://0.0.0.0:5030/fibonacci', data={'number': number})
+        response = requests.post(url='http://localhost:5003/fibonacci', data={'number': number})
     result = response.text
     return render_template('index.html', result=result)
 
@@ -44,4 +44,4 @@ def store_metric(table_name, metric):
     conn.close()
 
 if __name__ == '__main__':
-    app.run(port=8021,host='0.0.0.0',debug= True)
+    app.run(port=8000,host='0.0.0.0')
